@@ -54,5 +54,6 @@ COVERAGE_MODULE_EXCLUDES = ['tests$', 'settings$','urls$', 'common.views.test',
 # the HTML files.
 # You'll need to make sure this directory exists and is writable by the
 # user account running the test.
-COVERAGE_REPORT_HTML_OUTPUT_DIR = 'test_html'
+# You should probably set this one explicitly in your own settings file.
+COVERAGE_REPORT_HTML_OUTPUT_DIR = '/my_home/test_html'
 
