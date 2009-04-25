@@ -25,7 +25,7 @@ Install as a Django app
    directory. 
 2. Update your ``settings.INSTALLED_APPS`` to include ``test_coverage``. 
 3. Include test coverage specific settings in your own settings file. 
-   See ``settings/settings.py`` for more detail. 
+   See ``settings.py`` for more detail. 
 
 Once you've completed all the steps, you'll have a new custom command 
 available to you via ``manage.py test_coverage``. It works just like 
@@ -39,7 +39,7 @@ to. You can simply use the test runner if you like.
 1. Update ``settings.TEST_RUNNER = 
    'test_coverage.coverage_runner.run_tests'`` 
 2. Include test coverage specific settings in your own settings file. 
-   See ``settings/settings.py`` for more detail. 
+   See ``settings.py`` for more detail. 
 3. Run ``manage.py test`` like you normally do.
 
 And that's it.
