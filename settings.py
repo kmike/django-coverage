@@ -23,7 +23,7 @@ COVERAGE_TEST_RUNNER = 'test_coverage.coverage_runner.run_tests'
 # This setting is optional.
 COVERAGE_CODE_EXCLUDES = [
     'def __unicode__\(self\):', 'def get_absolute_url\(self\):',
-    'from sets import Set as set',
+    'from .* import .*', 'import .*',
     ]
     
 # Specify a list of regular expressions of paths to exclude from
