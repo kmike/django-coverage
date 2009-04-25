@@ -44,6 +44,10 @@ to. You can simply use the test runner if you like.
 
 And that's it.
 
+Where do I get it?
+==================
+http://opensource.55minutes.com/svn/python/trunk/django/apps/test_coverage/
+
 
 .. _George Song: mailto:george@55minutes.com
 .. _55 Minutes: http://www.55minutes.com/
