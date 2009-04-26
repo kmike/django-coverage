@@ -52,5 +52,5 @@ http://opensource.55minutes.com/svn/python/trunk/django/apps/test_coverage/
 .. _George Song: mailto:george@55minutes.com
 .. _55 Minutes: http://www.55minutes.com/
 .. _Ned Batchelder: http://nedbatchelder.com
-.. _coverage.py: http://nedbatchelder.com/code/modules/coverage.html
+.. _coverage.py: http://bitbucket.org/ned/coveragepy/
 .. _Django: http://www.djangoproject.com/
