@@ -4,5 +4,7 @@ Copyright 2009 55 Minutes
 This product includes software developed at 55 Minutes. 
 (http://www.55minutes.com/). 
 
-This software contains code derived from Django Software Foundation's 
-Django Web framework. (http://www.djangoproject.com/) 
+This software contains code derived from the Django Web Framework, 
+licensed under the BSD license. Copyright (c) Django Software Foundation 
+and individual contributors.
+(http://www.djangoproject.com/)
