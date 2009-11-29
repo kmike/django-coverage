@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
       name='django-coverage',
-      version='1.0',
+      version='1.0.1',
       author='George Song, Mikhail Korobov',
       author_email='george@55minutes.com, kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
