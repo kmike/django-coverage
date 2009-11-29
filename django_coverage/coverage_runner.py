@@ -60,25 +60,26 @@ def run_tests(test_labels, verbosity=1, interactive=True,
         coverage_modules, settings.COVERAGE_MODULE_EXCLUDES,
         settings.COVERAGE_PATH_EXCLUDES)
 
-    coverage.report(modules.values(), show_missing=1)
-    if excludes:
-        print >>sys.stdout
-        print >>sys.stdout, "The following packages or modules were excluded:",
-        for e in excludes:
-            print >>sys.stdout, e,
-        print >>sys.stdout
-    if errors:
-        print >>sys.stdout
-        print >>sys.stderr, "There were problems with the following packages or modules:",
-        for e in errors:
-            print >>sys.stderr, e,
-        print >>sys.stdout
-
     outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
-    outdir = os.path.abspath(outdir)
-    html_report(outdir, modules, excludes, errors)
-    print >>sys.stdout
-    print >>sys.stdout, "HTML reports were output to '%s'" %outdir
+    if outdir is None:
+        coverage.report(modules.values(), show_missing=1)
+        if excludes:
+            print >>sys.stdout
+            print >>sys.stdout, "The following packages or modules were excluded:",
+            for e in excludes:
+                print >>sys.stdout, e,
+            print >>sys.stdout
+        if errors:
+            print >>sys.stdout
+            print >>sys.stderr, "There were problems with the following packages or modules:",
+            for e in errors:
+                print >>sys.stderr, e,
+            print >>sys.stdout
+    else:
+        outdir = os.path.abspath(outdir)
+        html_report(outdir, modules, excludes, errors)
+        print >>sys.stdout
+        print >>sys.stdout, "HTML reports were output to '%s'" %outdir
 
     return results
 
