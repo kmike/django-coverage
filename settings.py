@@ -39,7 +39,7 @@ COVERAGE_CODE_EXCLUDES = getattr(settings, 'COVERAGE_CODE_EXCLUDES',[
 # Use this to exclude subdirectories like ``r'.svn'``, for example.
 # This setting is optional.
 COVERAGE_PATH_EXCLUDES = getattr(settings, 'COVERAGE_PATH_EXCLUDES',
-                                 [r'.svn', 'migrations'])
+                                 [r'.svn'])
 
 # Specify a list of additional module paths to include
 # in the coverage analysis. By default, only modules within installed
@@ -55,7 +55,8 @@ COVERAGE_ADDITIONAL_MODULES = getattr(settings, 'COVERAGE_ADDITIONAL_MODULES', [
 # This setting is optional.
 COVERAGE_MODULE_EXCLUDES = getattr(settings, 'COVERAGE_MODULE_EXCLUDES',
                                    ['tests$', 'settings$', 'urls$',
-                                    'common.views.test', '__init__', 'django'])
+                                    'common.views.test', '__init__', 'django',
+                                    'migrations'])
 
 
 # Specify the directory where you would like the coverage report to create
