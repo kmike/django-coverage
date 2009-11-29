@@ -77,7 +77,10 @@ def run_tests(test_labels, verbosity=1, interactive=True,
             print >>sys.stdout
     else:
         outdir = os.path.abspath(outdir)
-        html_report(outdir, modules, excludes, errors)
+        if settings.COVERAGE_CUSTOM_REPORTS:
+            html_report(outdir, modules, excludes, errors)
+        else:
+            coverage._the_coverage.html_report(modules.values(), outdir)
         print >>sys.stdout
         print >>sys.stdout, "HTML reports were output to '%s'" %outdir
 

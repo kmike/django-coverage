@@ -71,3 +71,7 @@ COVERAGE_MODULE_EXCLUDES = getattr(settings, 'COVERAGE_MODULE_EXCLUDES',
 COVERAGE_REPORT_HTML_OUTPUT_DIR = getattr(settings,
                                           'COVERAGE_REPORT_HTML_OUTPUT_DIR',
                                           None)
+
+# True => html reports by 55minutes
+# False => html reports by coverage.py
+COVERAGE_CUSTOM_REPORTS = getattr(settings, 'COVERAGE_CUSTOM_REPORTS', True)
