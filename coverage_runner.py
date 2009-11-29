@@ -16,7 +16,7 @@ limitations under the License.
 
 import coverage, os, sys
 
-from django.conf import settings
+from django_coverage import settings
 from django.db.models import get_app, get_apps
 from django.test.simple import run_tests as base_run_tests
 
@@ -36,7 +36,7 @@ def run_tests(test_labels, verbosity=1, interactive=True,
     run.
     """
     coverage.use_cache(0)
-    for e in getattr(settings, 'COVERAGE_CODE_EXCLUDES', []):
+    for e in settings.COVERAGE_CODE_EXCLUDES:
         coverage.exclude(e)
     coverage.start()
     results = base_run_tests(test_labels, verbosity, interactive, extra_tests)
@@ -52,11 +52,11 @@ def run_tests(test_labels, verbosity=1, interactive=True,
         for app in get_apps():
             coverage_modules.append(_get_app_package(app))
 
-    coverage_modules.extend(getattr(settings, 'COVERAGE_ADDITIONAL_MODULES', []))
+    coverage_modules.extend(settings.COVERAGE_ADDITIONAL_MODULES)
 
     packages, modules, excludes, errors = get_all_modules(
-        coverage_modules, getattr(settings, 'COVERAGE_MODULE_EXCLUDES', []),
-        getattr(settings, 'COVERAGE_PATH_EXCLUDES', []))
+        coverage_modules, settings.COVERAGE_MODULE_EXCLUDES,
+        settings.COVERAGE_PATH_EXCLUDES)
 
     coverage.report(modules.values(), show_missing=1)
     if excludes:
@@ -72,7 +72,7 @@ def run_tests(test_labels, verbosity=1, interactive=True,
             print >>sys.stderr, e,
         print >>sys.stdout
 
-    outdir = getattr(settings, 'COVERAGE_REPORT_HTML_OUTPUT_DIR', 'test_html')
+    outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
     outdir = os.path.abspath(outdir)
     html_report(outdir, modules, excludes, errors)
     print >>sys.stdout

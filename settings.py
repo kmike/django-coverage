@@ -14,17 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from django.conf import settings
+
 # Specify the coverage test runner
-COVERAGE_TEST_RUNNER = 'django_coverage.coverage_runner.run_tests'
+COVERAGE_TEST_RUNNER = getattr(settings, 'COVERAGE_TEST_RUNNER',
+                               'django_coverage.coverage_runner.run_tests')
 
 # Specify regular expressions of code blocks the coverage analyzer should
 # ignore as statements (e.g. ``raise NotImplemented``).
 # These statements are not figured in as part of the coverage statistics.
 # This setting is optional.
-COVERAGE_CODE_EXCLUDES = [
-    'def __unicode__\(self\):', 'def get_absolute_url\(self\):',
-    'from .* import .*', 'import .*',
-    ]
+
+COVERAGE_CODE_EXCLUDES = getattr(settings, 'COVERAGE_CODE_EXCLUDES',[
+                                    'def __unicode__\(self\):',
+                                    'def get_absolute_url\(self\):',
+                                    'from .* import .*', 'import .*',
+                                 ])
 
 # Specify a list of regular expressions of paths to exclude from
 # coverage analysis.
@@ -33,7 +38,8 @@ COVERAGE_CODE_EXCLUDES = [
 # TODO: THE SETTING FOR MODULES
 # Use this to exclude subdirectories like ``r'.svn'``, for example.
 # This setting is optional.
-COVERAGE_PATH_EXCLUDES = [r'.svn']
+COVERAGE_PATH_EXCLUDES = getattr(settings, 'COVERAGE_PATH_EXCLUDES',
+                                 [r'.svn', 'migrations'])
 
 # Specify a list of additional module paths to include
 # in the coverage analysis. By default, only modules within installed
@@ -42,18 +48,23 @@ COVERAGE_PATH_EXCLUDES = [r'.svn']
 # Note this list is *NOT* regular expression, so you have to be explicit,
 # such as 'myproject.utils', and not 'utils$'.
 # This setting is optional.
-COVERAGE_ADDITIONAL_MODULES = []
+COVERAGE_ADDITIONAL_MODULES = getattr(settings, 'COVERAGE_ADDITIONAL_MODULES', [])
 
 # Specify a list of regular expressions of module paths to exclude
 # from the coverage analysis. Examples are ``'tests$'`` and ``'urls$'``.
 # This setting is optional.
-COVERAGE_MODULE_EXCLUDES = ['tests$', 'settings$','urls$', 'common.views.test',
-                            '__init__', 'django']
+COVERAGE_MODULE_EXCLUDES = getattr(settings, 'COVERAGE_MODULE_EXCLUDES',
+                                   ['tests$', 'settings$', 'urls$',
+                                    'common.views.test', '__init__', 'django'])
+
 
 # Specify the directory where you would like the coverage report to create
 # the HTML files.
 # You'll need to make sure this directory exists and is writable by the
 # user account running the test.
 # You should probably set this one explicitly in your own settings file.
-COVERAGE_REPORT_HTML_OUTPUT_DIR = '/my_home/test_html'
 
+#COVERAGE_REPORT_HTML_OUTPUT_DIR = '/my_home/test_html'
+COVERAGE_REPORT_HTML_OUTPUT_DIR = getattr(settings,
+                                          'COVERAGE_REPORT_HTML_OUTPUT_DIR',
+                                          None)

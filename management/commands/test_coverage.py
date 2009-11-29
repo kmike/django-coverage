@@ -43,7 +43,7 @@ no apps are specified. Then generates coverage report both onscreen and as HTML.
     requires_model_validation = False
 
     def handle(self, *test_labels, **options):
-        from django.conf import settings
+        from django_coverage import settings
 
         verbosity = int(options.get('verbosity', 1))
         interactive = options.get('interactive', True)
