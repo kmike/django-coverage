@@ -1,0 +1,14 @@
+include README.rst
+include AUTHORS
+include LICENSE
+include NOTICE
+include setup.py
+
+include django_coverage/*.py
+include django_coverage/management/*.py
+include django_coverage/management/commands/*.py,
+include django_coverage/utils/*.py,
+include django_coverage/utils/module_tools/*.py
+include django_coverage/utils/coverage_report/*.py
+include django_coverage/utils/coverage_report.templates/*.py
+
