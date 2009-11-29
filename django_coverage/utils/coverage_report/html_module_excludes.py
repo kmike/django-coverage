@@ -12,6 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Changed by Mikhail Korobov.
 """
 
 from html_module_exceptions import html_module_exceptions
@@ -47,7 +49,7 @@ def html_module_excludes(filename, excludes):
                     * ``%(module_name)s``
     """
     long_desc = """\
-    These packages and modules were excluded from the coverage analysis in 
+    These packages and modules were excluded from the coverage analysis in
     <code>django.conf.settings.COVERAGE_MODULE_EXCLUDES</code> or they do
     not contain any executable statements:
     """
