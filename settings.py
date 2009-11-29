@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 # Specify the coverage test runner
-COVERAGE_TEST_RUNNER = 'test_coverage.coverage_runner.run_tests'
+COVERAGE_TEST_RUNNER = 'django_coverage.coverage_runner.run_tests'
 
 # Specify regular expressions of code blocks the coverage analyzer should
 # ignore as statements (e.g. ``raise NotImplemented``).
@@ -25,7 +25,7 @@ COVERAGE_CODE_EXCLUDES = [
     'def __unicode__\(self\):', 'def get_absolute_url\(self\):',
     'from .* import .*', 'import .*',
     ]
-    
+
 # Specify a list of regular expressions of paths to exclude from
 # coverage analysis.
 # Note these paths are ignored by the module introspection tool and take
