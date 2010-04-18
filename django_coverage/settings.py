@@ -56,7 +56,7 @@ COVERAGE_ADDITIONAL_MODULES = getattr(settings, 'COVERAGE_ADDITIONAL_MODULES', [
 # from the coverage analysis. Examples are ``'tests$'`` and ``'urls$'``.
 # This setting is optional.
 COVERAGE_MODULE_EXCLUDES = getattr(settings, 'COVERAGE_MODULE_EXCLUDES',
-                                   ['tests$', 'settings$', 'urls$',
+                                   ['tests$', 'settings$', 'urls$', 'locale$',
                                     'common.views.test', '__init__', 'django',
                                     'migrations'])
 
