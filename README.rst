@@ -12,17 +12,17 @@ your tests.
 
 Dependencies
 ============
-* Django_ 1.0.2 and above. It may work with earlier versions, but I
-  haven't tested anything prior to 1.0.2 explicitly.
+* Django_ 1.2 and above. For earlier versions, try version 1.0.1 of
+  django-coverage.
 * coverage.py_
 
 How do I use it?
 ================
 Install as a Django app
 -----------------------
-1. Place the entire ``test_coverage`` app in your third-party apps
+1. Place the entire ``django_coverage`` app in your third-party apps
    directory.
-2. Update your ``settings.INSTALLED_APPS`` to include ``test_coverage``.
+2. Update your ``settings.INSTALLED_APPS`` to include ``django_coverage``.
 3. Include test coverage specific settings in your own settings file.
    See ``settings.py`` for more detail.
 
@@ -36,7 +36,7 @@ You don't have to install ``test_coverage`` as an app if you don't want
 to. You can simply use the test runner if you like.
 
 1. Update ``settings.TEST_RUNNER =
-   'test_coverage.coverage_runner.run_tests'``
+   'test_coverage.coverage_runner.CoverageRunner'``
 2. Include test coverage specific settings in your own settings file.
    See ``settings.py`` for more detail.
 3. Run ``manage.py test`` like you normally do.

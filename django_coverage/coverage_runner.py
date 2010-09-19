@@ -16,73 +16,94 @@ limitations under the License.
 Changed by Mikhail Korobov.
 """
 
-import coverage, os, sys
+import os
+import sys
+
+from django.db.models import get_app, get_apps
+from django.test.simple import DjangoTestSuiteRunner
+from django.test.utils import get_runner
+
+import coverage
 
 from django_coverage import settings
-from django.db.models import get_app, get_apps
-from django.test.simple import run_tests as base_run_tests
+from django_coverage.utils.coverage_report import html_report
+from django_coverage.utils.module_tools import get_all_modules
 
-from utils.module_tools import get_all_modules
-from utils.coverage_report import html_report
 
-def _get_app_package(app_model_module):
+class CoverageRunner(DjangoTestSuiteRunner):
     """
-    Returns the app module name from the app model module.
+    Test runner which displays a code coverage report at the end of the run.
     """
-    return '.'.join(app_model_module.__name__.split('.')[:-1])
+    
+    def __new__(cls, *args, **kwargs):
+        """
+        Add the original test runner to the front of CoverageRunner's bases,
+        so that CoverageRunner will inherit from it. This allows it to work
+        with customized test runners.
+        """
+        # Change the test runner back to its original value in order to get
+        # the original runner.
+        settings.TEST_RUNNER = settings.ORIG_TEST_RUNNER
+        TestRunner = get_runner(settings)
+        cls.__bases__ = (TestRunner,) + cls.__bases__
+        return super(CoverageRunner, cls).__new__(cls, *args, **kwargs)
 
-def run_tests(test_labels, verbosity=1, interactive=True,
-              extra_tests=[]):
-    """
-    Test runner which displays a code coverage report at the end of the
-    run.
-    """
-    coverage.use_cache(0)
-    for e in settings.COVERAGE_CODE_EXCLUDES:
-        coverage.exclude(e)
-    coverage.start()
-    results = base_run_tests(test_labels, verbosity, interactive, extra_tests)
-    coverage.stop()
+    def _get_app_package(self, app_model_module):
+        """
+        Returns the app module name from the app model module.
+        """
+        return '.'.join(app_model_module.__name__.split('.')[:-1])
 
-    coverage_modules = []
-    if test_labels:
-        for label in test_labels:
-            label = label.split('.')[0]
-            app = get_app(label)
-            coverage_modules.append(_get_app_package(app))
-    else:
-        for app in get_apps():
-            coverage_modules.append(_get_app_package(app))
+    def run_tests(self, test_labels, extra_tests=None, **kwargs):
+        coverage.use_cache(0)
+        for e in settings.COVERAGE_CODE_EXCLUDES:
+            coverage.exclude(e)
+        coverage.start()
+        results = super(CoverageRunner, self).run_tests(test_labels,
+                                                        extra_tests, **kwargs)
+        coverage.stop()
 
-    coverage_modules.extend(settings.COVERAGE_ADDITIONAL_MODULES)
-
-    packages, modules, excludes, errors = get_all_modules(
-        coverage_modules, settings.COVERAGE_MODULE_EXCLUDES,
-        settings.COVERAGE_PATH_EXCLUDES)
-
-    outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
-    if outdir is None:
-        coverage.report(modules.values(), show_missing=1)
-        if excludes:
-            print >>sys.stdout
-            print >>sys.stdout, "The following packages or modules were excluded:",
-            for e in excludes:
-                print >>sys.stdout, e,
-            print >>sys.stdout
-        if errors:
-            print >>sys.stdout
-            print >>sys.stderr, "There were problems with the following packages or modules:",
-            for e in errors:
-                print >>sys.stderr, e,
-            print >>sys.stdout
-    else:
-        outdir = os.path.abspath(outdir)
-        if settings.COVERAGE_CUSTOM_REPORTS:
-            html_report(outdir, modules, excludes, errors)
+        coverage_modules = []
+        if test_labels:
+            for label in test_labels:
+                label = label.split('.')[0]
+                app = get_app(label)
+                coverage_modules.append(self._get_app_package(app))
         else:
-            coverage._the_coverage.html_report(modules.values(), outdir)
-        print >>sys.stdout
-        print >>sys.stdout, "HTML reports were output to '%s'" %outdir
+            for app in get_apps():
+                coverage_modules.append(self._get_app_package(app))
 
-    return results
+        coverage_modules.extend(settings.COVERAGE_ADDITIONAL_MODULES)
 
+        packages, modules, excludes, errors = get_all_modules(
+            coverage_modules, settings.COVERAGE_MODULE_EXCLUDES,
+            settings.COVERAGE_PATH_EXCLUDES)
+
+        outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
+        if outdir is None:
+            coverage.report(modules.values(), show_missing=1)
+            if excludes:
+                message = "The following packages or modules were excluded:"
+                print >>sys.stdout
+                print >>sys.stdout, message,
+                for e in excludes:
+                    print >>sys.stdout, e,
+                print >>sys.stdout
+            if errors:
+                message = "There were problems with the following packages "
+                message += "or modules:"
+                print >>sys.stdout
+                print >>sys.stderr, message,
+                for e in errors:
+                    print >>sys.stderr, e,
+                print >>sys.stdout
+        else:
+            outdir = os.path.abspath(outdir)
+            if settings.COVERAGE_CUSTOM_REPORTS:
+                html_report(outdir, modules, excludes, errors)
+            else:
+                coverage._the_coverage.html_report(modules.values(), outdir)
+            print >>sys.stdout
+            print >>sys.stdout, "HTML reports were output to '%s'" %outdir
+
+        return results

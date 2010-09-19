@@ -20,7 +20,7 @@ from django.conf import settings
 
 # Specify the coverage test runner
 COVERAGE_TEST_RUNNER = getattr(settings, 'COVERAGE_TEST_RUNNER',
-                               'django_coverage.coverage_runner.run_tests')
+                             'django_coverage.coverage_runner.CoverageRunner')
 
 # Specify regular expressions of code blocks the coverage analyzer should
 # ignore as statements (e.g. ``raise NotImplemented``).
