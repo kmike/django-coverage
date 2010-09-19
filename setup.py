@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 from distutils.core import setup
+from django_coverage import __version__
 
 setup(
       name='django-coverage',
-      version='1.0.1',
+      version=__version__,
       author='George Song, Mikhail Korobov',
       author_email='george@55minutes.com, kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
