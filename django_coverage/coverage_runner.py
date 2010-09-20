@@ -41,11 +41,12 @@ class CoverageRunner(DjangoTestSuiteRunner):
         so that CoverageRunner will inherit from it. This allows it to work
         with customized test runners.
         """
-        # Change the test runner back to its original value in order to get
-        # the original runner.
-        settings.TEST_RUNNER = settings.ORIG_TEST_RUNNER
-        TestRunner = get_runner(settings)
-        cls.__bases__ = (TestRunner,) + cls.__bases__
+        # If the test runner was changed by the management command, change it
+        # back to its original value in order to get the original runner.
+        if getattr(settings, 'ORIG_TEST_RUNNER', None):
+            settings.TEST_RUNNER = settings.ORIG_TEST_RUNNER
+            TestRunner = get_runner(settings)
+            cls.__bases__ = (TestRunner,) + cls.__bases__
         return super(CoverageRunner, cls).__new__(cls, *args, **kwargs)
 
     def _get_app_package(self, app_model_module):
