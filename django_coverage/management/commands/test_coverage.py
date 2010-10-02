@@ -42,6 +42,17 @@ no apps are specified. Then generates coverage report both onscreen and as HTML.
 
     requires_model_validation = False
 
+    def __init__(self):
+        super(Command, self).__init__()
+    #Added to allow django-coverage to work with south
+    #Code adapted from Marcin Swierczynski's blog
+    #http://blog.swierczynski.net/2010/07/code-coverage-analysis-in-django/
+	try:
+	    from south.management.commands import patch_for_test_db_setup
+	    patch_for_test_db_setup()
+	except ImportError:
+	    pass
+
     def handle(self, *test_labels, **options):
         from django_coverage import settings
 
