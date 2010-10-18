@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Changed by Mikhail Korobov.
 """
 
 import os
@@ -34,7 +33,7 @@ class CoverageRunner(DjangoTestSuiteRunner):
     """
     Test runner which displays a code coverage report at the end of the run.
     """
-    
+
     def __new__(cls, *args, **kwargs):
         """
         Add the original test runner to the front of CoverageRunner's bases,
@@ -46,8 +45,9 @@ class CoverageRunner(DjangoTestSuiteRunner):
         if getattr(settings, 'ORIG_TEST_RUNNER', None):
             settings.TEST_RUNNER = settings.ORIG_TEST_RUNNER
             TestRunner = get_runner(settings)
-            cls.__bases__ = (TestRunner,) + cls.__bases__
-        return super(CoverageRunner, cls).__new__(cls, *args, **kwargs)
+            if (TestRunner != DjangoTestSuiteRunner):
+                cls.__bases__ = (TestRunner,) + cls.__bases__
+        return super(CoverageRunner, cls).__new__(cls)
 
     def _get_app_package(self, app_model_module):
         """
