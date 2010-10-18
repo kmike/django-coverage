@@ -12,7 +12,7 @@ your tests.
 
 Dependencies
 ============
-* Django_ 1.2 and above. For earlier versions, try version 1.0.1 of
+* Django_ 1.2 and above. For earlier versions, try version 1.0.2 of
   django-coverage.
 * coverage.py_
 

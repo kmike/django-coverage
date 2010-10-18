@@ -10,12 +10,14 @@ setup(
       maintainer = 'Mikhail Korobov',
       maintainer_email = 'kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
-      download_url = 'http://bitbucket.org/kmike/django-coverage/get/tip.zip',
+      download_url = 'http://bitbucket.org/kmike/django-coverage/get/1.1a1.zip',
 
       description = 'Django Test Coverage App',
       long_description = "A test coverage reporting tool that utilizes "
                          "Ned Batchelder's excellent coverage.py to show how "
-                         "much of your code is exercised with your tests.",
+                         "much of your code is exercised with your tests."
+                         "django-coverage requires django 1.2 now."
+                         "Use http://pypi.python.org/pypi/django-coverage/1.0.2 if you have django < 1.2.",
 
       license = 'Apache License 2.0',
       packages=['django_coverage',
@@ -26,7 +28,7 @@ setup(
                 'django_coverage.utils.coverage_report',
                 'django_coverage.utils.coverage_report.templates'],
 
-      requires = ['django (>=1.0.2)', 'coverage (>= 2.85)'],
+      requires = ['django (>=1.2)', 'coverage (>= 2.85)'],
 
       classifiers=[
           'Development Status :: 4 - Beta',
