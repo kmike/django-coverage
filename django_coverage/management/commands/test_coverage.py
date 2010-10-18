@@ -25,6 +25,17 @@ class Command(test.Command):
             "entire site if no apps are specified. Then generates coverage "
             "report both onscreen and as HTML.")
 
+    def __init__(self):
+        super(Command, self).__init__()
+    #Added to allow django-coverage to work with south
+    #Code adapted from Marcin Swierczynski's blog
+    #http://blog.swierczynski.net/2010/07/code-coverage-analysis-in-django/
+        try:
+            from south.management.commands import patch_for_test_db_setup
+            patch_for_test_db_setup()
+        except ImportError:
+            pass
+
     def handle(self, *test_labels, **options):
         """
         Replaces the original test runner with the coverage test runner, but
@@ -35,4 +46,4 @@ class Command(test.Command):
         coverage_settings.ORIG_TEST_RUNNER = settings.TEST_RUNNER
         settings.TEST_RUNNER = coverage_settings.COVERAGE_TEST_RUNNER
         call_command('test', *test_labels, **options)
-        
+
