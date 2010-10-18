@@ -15,9 +15,7 @@ setup(
       description = 'Django Test Coverage App',
       long_description = "A test coverage reporting tool that utilizes "
                          "Ned Batchelder's excellent coverage.py to show how "
-                         "much of your code is exercised with your tests."
-                         "django-coverage requires django 1.2 now."
-                         "Use http://pypi.python.org/pypi/django-coverage/1.0.2 if you have django < 1.2.",
+                         "much of your code is exercised with your tests.",
 
       license = 'Apache License 2.0',
       packages=['django_coverage',
