@@ -24,7 +24,7 @@ except ImportError:
     msg = """
 
     django-coverage 1.1 requires django 1.2+.
-    Please use django-coverage 1.0.2 in you have django 1.1 or django 1.0
+    Please use django-coverage 1.0.2 if you have django 1.1 or django 1.0
     """
     raise Exception(msg)
 
