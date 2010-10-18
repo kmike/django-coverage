@@ -5,8 +5,10 @@ from django_coverage import __version__
 setup(
       name='django-coverage',
       version=__version__,
-      author='George Song, Mikhail Korobov',
-      author_email='george@55minutes.com, kmike84@gmail.com',
+      author='George Song',
+      author_email='george@55minutes.com',
+      maintainer = 'Mikhail Korobov',
+      maintainer_email = 'kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
       download_url = 'http://bitbucket.org/kmike/django-coverage/get/tip.zip',
 
