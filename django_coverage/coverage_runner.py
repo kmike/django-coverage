@@ -18,8 +18,17 @@ limitations under the License.
 import os
 import sys
 
+try:
+    from django.test.simple import DjangoTestSuiteRunner
+except ImportError:
+    msg = """
+
+    django-coverage 1.1 requires django 1.2+.
+    Please use django-coverage 1.0.2 in you have django 1.1 or django 1.0
+    """
+    raise Exception(msg)
+
 from django.db.models import get_app, get_apps
-from django.test.simple import DjangoTestSuiteRunner
 from django.test.utils import get_runner
 
 import coverage
