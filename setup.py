@@ -35,6 +35,7 @@ setup(
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Apache Software License',
           'Programming Language :: Python',
-          'Topic :: Software Development :: Libraries :: Python Modules'
+          'Topic :: Software Development :: Libraries :: Python Modules',
+          'Topic :: Software Development :: Testing',
       ],
 )
