@@ -14,53 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from django.core.management.base import BaseCommand
-from optparse import make_option
-import sys
+from django.conf import settings
+from django.core.management import call_command
+from django.core.management.commands import test
+from django_coverage import settings as coverage_settings
 
-def get_runner(settings):
-    test_path = settings.COVERAGE_TEST_RUNNER.split('.')
-    # Allow for Python 2.5 relative paths
-    if len(test_path) > 1:
-        test_module_name = '.'.join(test_path[:-1])
-    else:
-        test_module_name = '.'
-    test_module = __import__(test_module_name, {}, {}, test_path[-1])
-    test_runner = getattr(test_module, test_path[-1])
-    return test_runner
 
-class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option('--noinput', action='store_false', dest='interactive', default=True,
-            help='Tells Django to NOT prompt the user for input of any kind.'),
-    )
-    help = """\
-Runs the test suite for the specified applications, or the entire site if \
-no apps are specified. Then generates coverage report both onscreen and as HTML.
-"""
-    args = '[appname ...]'
-
-    requires_model_validation = False
-
-    def __init__(self):
-        super(Command, self).__init__()
-    #Added to allow django-coverage to work with south
-    #Code adapted from Marcin Swierczynski's blog
-    #http://blog.swierczynski.net/2010/07/code-coverage-analysis-in-django/
-	try:
-	    from south.management.commands import patch_for_test_db_setup
-	    patch_for_test_db_setup()
-	except ImportError:
-	    pass
+class Command(test.Command):
+    help = ("Runs the test suite for the specified applications, or the "
+            "entire site if no apps are specified. Then generates coverage "
+            "report both onscreen and as HTML.")
 
     def handle(self, *test_labels, **options):
-        from django_coverage import settings
-
-        verbosity = int(options.get('verbosity', 1))
-        interactive = options.get('interactive', True)
-        test_runner = get_runner(settings)
-
-        failures = test_runner(test_labels, verbosity=verbosity, interactive=interactive)
-        if failures:
-            sys.exit(failures)
-
+        """
+        Replaces the original test runner with the coverage test runner.
+        Then, call the test command. This plays well with apps that
+        override the test command, such as South.
+        """
+        settings.TEST_RUNNER = coverage_settings.COVERAGE_TEST_RUNNER
+        call_command('test', *test_labels, **options)

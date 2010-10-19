@@ -3,11 +3,13 @@ from distutils.core import setup
 
 setup(
       name='django-coverage',
-      version='1.0.1',
-      author='George Song, Mikhail Korobov',
-      author_email='george@55minutes.com, kmike84@gmail.com',
+      version='1.0.3',
+      author='George Song',
+      author_email='george@55minutes.com',
+      maintainer = 'Mikhail Korobov',
+      maintainer_email = 'kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
-      download_url = 'http://bitbucket.org/kmike/django-coverage/get/tip.zip',
+      download_url = 'http://bitbucket.org/kmike/django-coverage/get/1.0.3.gz',
 
       description = 'Django Test Coverage App',
       long_description = "A test coverage reporting tool that utilizes "
@@ -32,6 +34,7 @@ setup(
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Apache Software License',
           'Programming Language :: Python',
-          'Topic :: Software Development :: Libraries :: Python Modules'
+          'Topic :: Software Development :: Libraries :: Python Modules',
+          'Topic :: Software Development :: Testing',
       ],
 )
