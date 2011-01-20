@@ -77,14 +77,16 @@ def html_module_detail(filename, module_name, nav=None):
         nav_html = module_detail.NAV_NO_NEXT %nav
     elif 'next_link' in nav:
         nav_html = module_detail.NAV_NO_PREV %nav
+    else:
+        nav_html = None
             
     fo = file(filename, 'wb+')
     print >>fo, module_detail.TOP %m_vars.__dict__
-    if nav:
+    if nav and nav_html:
         print >>fo, nav_html
     print >>fo, module_detail.CONTENT_HEADER %m_vars.__dict__
     print >>fo, module_detail.CONTENT_BODY %m_vars.__dict__
-    if nav:
+    if nav and nav_html:
         print >>fo, nav_html
     print >>fo, module_detail.BOTTOM
     fo.close()
