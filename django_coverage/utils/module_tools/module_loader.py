@@ -52,6 +52,8 @@ def _load_package(pkg_name, fp, desc):
     if pkg_name in sys.modules:
         if fp in sys.modules[pkg_name].__path__:
             pkg = sys.modules[pkg_name]
+        else:
+            pkg = None
     else:
         pkg = _brute_force_find_module(pkg_name, fp, mtype)
     if not pkg:
