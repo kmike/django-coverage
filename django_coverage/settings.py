@@ -22,11 +22,13 @@ from django.conf import settings
 COVERAGE_TEST_RUNNER = getattr(settings, 'COVERAGE_TEST_RUNNER',
                              'django_coverage.coverage_runner.CoverageRunner')
 
+# Specify whether coverage data file is created or not.
+COVERAGE_USE_CACHE = getattr(settings, 'COVERAGE_USE_CACHE', False)
+
 # Specify regular expressions of code blocks the coverage analyzer should
 # ignore as statements (e.g. ``raise NotImplemented``).
 # These statements are not figured in as part of the coverage statistics.
 # This setting is optional.
-
 COVERAGE_CODE_EXCLUDES = getattr(settings, 'COVERAGE_CODE_EXCLUDES',[
                                     'def __unicode__\(self\):',
                                     'def get_absolute_url\(self\):',

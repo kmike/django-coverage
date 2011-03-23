@@ -65,7 +65,7 @@ class CoverageRunner(DjangoTestSuiteRunner):
         return '.'.join(app_model_module.__name__.split('.')[:-1])
 
     def run_tests(self, test_labels, extra_tests=None, **kwargs):
-        coverage.use_cache(0)
+        coverage.use_cache(settings.COVERAGE_USE_CACHE)
         for e in settings.COVERAGE_CODE_EXCLUDES:
             coverage.exclude(e)
         coverage.start()
