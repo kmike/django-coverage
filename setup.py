@@ -10,7 +10,7 @@ setup(
       maintainer = 'Mikhail Korobov',
       maintainer_email = 'kmike84@gmail.com',
       url = 'http://bitbucket.org/kmike/django-coverage/',
-      download_url = 'http://bitbucket.org/kmike/django-coverage/get/1.1.1.zip',
+      download_url = 'http://bitbucket.org/kmike/django-coverage/get/1.2.zip',
 
       description = 'Django Test Coverage App',
       long_description = "A test coverage reporting tool that utilizes "
