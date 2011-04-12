@@ -32,11 +32,11 @@ available to you via ``manage.py test_coverage``. It works just like
 
 Use it as a test runner
 -----------------------
-You don't have to install ``test_coverage`` as an app if you don't want
+You don't have to install ``django_coverage`` as an app if you don't want
 to. You can simply use the test runner if you like.
 
 1. Update ``settings.TEST_RUNNER =
-   'test_coverage.coverage_runner.CoverageRunner'``
+   'django_coverage.coverage_runner.CoverageRunner'``
 2. Include test coverage specific settings in your own settings file.
    See ``settings.py`` for more detail.
 3. Run ``manage.py test`` like you normally do.
