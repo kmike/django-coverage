@@ -83,6 +83,7 @@ def prune_dirs(root, dirs, exclude_dirs):
         for regex in regexes:
             if regex.search(path):
                 dirs.remove(dir_)
+                break
 
 def _get_all_packages(pkg_name, pkg, blacklist, exclude_dirs):
     packages = Packages().packages
