@@ -102,7 +102,10 @@ def html_report(outdir, modules, excludes=None, errors=None):
         total_excluded += m_vars.excluded_count
         total_stmts += len(m_vars.stmts)
     module_stats = os.linesep.join(module_stats)
-    overall_covered = float(total_executed)/total_stmts*100
+    if total_stmts:
+        overall_covered = float(total_executed)/total_stmts*100
+    else:
+        overall_covered = 0.0
 
     m_names = modules.keys()
     m_names.sort()
