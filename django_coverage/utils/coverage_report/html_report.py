@@ -72,15 +72,11 @@ def html_report(outdir, modules, excludes=None, errors=None):
                  * ``%(excluded_count)d``
                  * ``%(percent_covered)0.1f``
     """
-    # TODO: More robust directory checking and creation
-    outdir = os.path.abspath(outdir)
     test_timestamp = time.strftime('%a %Y-%m-%d %H:%M %Z')
     m_subdirname = 'modules'
     m_dir = os.path.join(outdir, m_subdirname)
-    try:
-        os.mkdir(m_dir)
-    except OSError:
-        pass
+    if not os.path.exists(m_dir):
+        os.makedirs(m_dir)
 
     total_lines = 0
     total_executed = 0
