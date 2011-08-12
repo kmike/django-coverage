@@ -78,11 +78,11 @@ def _parse_module_list(m_list):
             packages[m_name] = module
 
 def prune_dirs(root, dirs, exclude_dirs):
-    _dirs = [os.path.join(root, d) for d in dirs]
-    for i, p in enumerate(_dirs):
-        for e in exclude_dirs:
-            if re.search(e, p):
-                del dirs[i]
+    regexes = [re.compile(exclude_dir) for exclude_dir in exclude_dirs]
+    for path, dir_ in [(os.path.join(root, dir_), dir_) for dir_ in dirs]:
+        for regex in regexes:
+            if regex.search(path):
+                dirs.remove(dir_)
                 break
 
 def _get_all_packages(pkg_name, pkg, blacklist, exclude_dirs):
