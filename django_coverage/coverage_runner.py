@@ -89,8 +89,7 @@ class CoverageRunner(DjangoTestSuiteRunner):
             coverage_modules, settings.COVERAGE_MODULE_EXCLUDES,
             settings.COVERAGE_PATH_EXCLUDES)
 
-        outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
-        if outdir is None:
+        if settings.COVERAGE_USE_STDOUT:
             coverage.report(modules.values(), show_missing=1)
             if excludes:
                 message = "The following packages or modules were excluded:"
@@ -107,7 +106,9 @@ class CoverageRunner(DjangoTestSuiteRunner):
                 for e in errors:
                     print >>sys.stderr, e,
                 print >>sys.stdout
-        else:
+
+        outdir = settings.COVERAGE_REPORT_HTML_OUTPUT_DIR
+        if outdir:
             outdir = os.path.abspath(outdir)
             if settings.COVERAGE_CUSTOM_REPORTS:
                 html_report(outdir, modules, excludes, errors)

@@ -77,3 +77,11 @@ COVERAGE_REPORT_HTML_OUTPUT_DIR = getattr(settings,
 # True => html reports by 55minutes
 # False => html reports by coverage.py
 COVERAGE_CUSTOM_REPORTS = getattr(settings, 'COVERAGE_CUSTOM_REPORTS', True)
+
+
+# True => Always output coverage reports to STDOUT.
+# False => Don't output coverage reports to STDOUT.
+#
+# This makes it possible to both generate HTML reports and see coverage
+# information on STDOUT.
+COVERAGE_USE_STDOUT = getattr(settings, 'COVERAGE_USE_STDOUT', True)
