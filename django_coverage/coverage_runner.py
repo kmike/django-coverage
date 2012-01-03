@@ -23,7 +23,7 @@ try:
 except ImportError:
     msg = """
 
-    django-coverage 1.1 requires django 1.2+.
+    django-coverage 1.1+ requires django 1.2+.
     Please use django-coverage 1.0.3 if you have django 1.1 or django 1.0
     """
     raise Exception(msg)

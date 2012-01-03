@@ -81,7 +81,8 @@ COVERAGE_CUSTOM_REPORTS = getattr(settings, 'COVERAGE_CUSTOM_REPORTS', True)
 
 # True => Always output coverage reports to STDOUT.
 # False => Don't output coverage reports to STDOUT.
+# (not set) => output coverage reports to STDOUT only if COVERAGE_REPORT_HTML_OUTPUT_DIR is not set or None.
 #
 # This makes it possible to both generate HTML reports and see coverage
 # information on STDOUT.
-COVERAGE_USE_STDOUT = getattr(settings, 'COVERAGE_USE_STDOUT', True)
+COVERAGE_USE_STDOUT = getattr(settings, 'COVERAGE_USE_STDOUT', COVERAGE_REPORT_HTML_OUTPUT_DIR is None)
