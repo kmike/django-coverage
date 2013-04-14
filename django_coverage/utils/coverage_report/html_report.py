@@ -139,4 +139,7 @@ def html_report(outdir, modules, excludes=None, errors=None):
         html_module_errors(os.path.join(outdir, _file), errors)
     print >>fo, module_index.BOTTOM
     fo.close()
+    
+    badge = open(os.path.join(os.path.dirname(__file__), 'badges', '%s.png' % int(overall_covered))).read()
+    open(os.path.join(outdir, 'coverage_status.png'), 'wb').write(badge)
 
