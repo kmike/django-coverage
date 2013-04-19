@@ -58,6 +58,13 @@ types are included, you will be able to select which is used by
 
 To prevent the badge generation, you could set this to ``None``.
 
+Using the coverage badge with drone.io_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+drone.io_ has no native support for coverage reporting. However, you
+can save build artifacts: just tell it to save one called:
+``.coverage/coverage_status.png``. Then you can reference it in your
+project's README.
 
 And that's it.
 
@@ -67,3 +74,4 @@ And that's it.
 .. _Ned Batchelder: http://nedbatchelder.com
 .. _coverage.py: http://bitbucket.org/ned/coveragepy/
 .. _Django: http://www.djangoproject.com/
+.. _drone.io: http://drone.io/
