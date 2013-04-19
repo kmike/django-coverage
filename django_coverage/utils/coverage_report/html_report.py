@@ -22,6 +22,7 @@ from html_module_detail import html_module_detail
 from html_module_errors import html_module_errors
 from html_module_excludes import html_module_excludes
 from templates import default_module_index as module_index
+from django_coverage import settings
 
 def html_report(outdir, modules, excludes=None, errors=None):
     """
@@ -140,6 +141,11 @@ def html_report(outdir, modules, excludes=None, errors=None):
     print >>fo, module_index.BOTTOM
     fo.close()
     
-    badge = open(os.path.join(os.path.dirname(__file__), 'badges', '%s.png' % int(overall_covered))).read()
+    badge = open(os.path.join(
+        os.path.dirname(__file__), 
+        'badges', 
+        settings.COVERAGE_BADGE_TYPE, 
+        '%s.png' % int(overall_covered)
+    )).read()
     open(os.path.join(outdir, 'coverage_status.png'), 'wb').write(badge)
 

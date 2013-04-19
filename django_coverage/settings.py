@@ -86,3 +86,7 @@ COVERAGE_CUSTOM_REPORTS = getattr(settings, 'COVERAGE_CUSTOM_REPORTS', True)
 # This makes it possible to both generate HTML reports and see coverage
 # information on STDOUT.
 COVERAGE_USE_STDOUT = getattr(settings, 'COVERAGE_USE_STDOUT', COVERAGE_REPORT_HTML_OUTPUT_DIR is None)
+
+# The name of the folder within utils/coverage_report/badges/ that
+# contains the badges we want to use.
+COVERAGE_BADGE_TYPE = getattr(settings, 'COVERAGE_BADGE_TYPE', 'drone.io')

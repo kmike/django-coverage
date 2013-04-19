@@ -25,7 +25,7 @@ setup(
                 'django_coverage.utils.module_tools',
                 'django_coverage.utils.coverage_report',
                 'django_coverage.utils.coverage_report.templates'],
-      package_data={'django_coverage': ['utils/coverage_report/badges/*.png']},
+      package_data={'django_coverage': ['utils/coverage_report/badges/*/*.png']},
 
       requires = ['django (>=1.2)', 'coverage (>= 2.85)'],
 
