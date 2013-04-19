@@ -9,8 +9,7 @@ setup(
       author_email='george@55minutes.com',
       maintainer = 'Mikhail Korobov',
       maintainer_email = 'kmike84@gmail.com',
-      url = 'http://bitbucket.org/kmike/django-coverage/',
-      download_url = 'http://bitbucket.org/kmike/django-coverage/get/%s.zip' % __version__,
+      url = 'https://bitbucket.org/kmike/django-coverage/',
 
       description = 'Django Test Coverage App',
       long_description = "A test coverage reporting tool that utilizes "
