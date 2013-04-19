@@ -136,6 +136,7 @@ CONTENT_HEADER = """\
 <div id="content-header">
   <h1>Test Coverage Report</h1>
   <p>Generated: %(test_timestamp)s</p>
+  <p><img src="coverage_status.png"></p>
 </div>
 """
 
