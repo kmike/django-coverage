@@ -14,13 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 """
-
 import os
 import sys
 
-try:
-    from django.test.simple import DjangoTestSuiteRunner
-except ImportError:
+import django
+
+if django.VERSION < (1, 2):
     msg = """
 
     django-coverage 1.1+ requires django 1.2+.
@@ -28,6 +27,7 @@ except ImportError:
     """
     raise Exception(msg)
 
+from django.conf import global_settings
 from django.db.models import get_app, get_apps
 from django.test.utils import get_runner
 
@@ -36,6 +36,9 @@ import coverage
 from django_coverage import settings
 from django_coverage.utils.coverage_report import html_report
 from django_coverage.utils.module_tools import get_all_modules
+
+
+DjangoTestSuiteRunner = get_runner(global_settings)
 
 
 class CoverageRunner(DjangoTestSuiteRunner):
