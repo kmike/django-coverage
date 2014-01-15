@@ -54,4 +54,3 @@ def html_module_excludes(filename, excludes):
     not contain any executable statements:
     """
     html_module_exceptions(filename, excludes, module_excludes, long_desc)
-

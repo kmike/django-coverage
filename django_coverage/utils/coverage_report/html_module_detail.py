@@ -79,7 +79,7 @@ def html_module_detail(filename, module_name, nav=None):
         nav_html = module_detail.NAV_NO_PREV %nav
     else:
         nav_html = None
-            
+
     fo = file(filename, 'wb+')
     print >>fo, module_detail.TOP %m_vars.__dict__
     if nav and nav_html:

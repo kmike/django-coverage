@@ -140,7 +140,7 @@ def html_report(outdir, modules, excludes=None, errors=None):
         html_module_errors(os.path.join(outdir, _file), errors)
     print >>fo, module_index.BOTTOM
     fo.close()
-    
+
     if settings.COVERAGE_BADGE_TYPE:
         badge = open(os.path.join(
             os.path.dirname(__file__),
