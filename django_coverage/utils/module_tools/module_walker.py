@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import os, re, sys
+import os, re
 from glob import glob
 
 from django_coverage.utils.module_tools.data_storage import *
