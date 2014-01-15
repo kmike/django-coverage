@@ -25,15 +25,21 @@ class SingletonType(type):
             cls.__instance__ = instance
         return cls.__instance__
 
-class Packages(object, metaclass=SingletonType):
+
+Singleton = SingletonType('SingletonMetaClass', (object,), {})
+
+
+class Packages(Singleton):
     packages = {}
 
-class Modules(object, metaclass=SingletonType):
+
+class Modules(Singleton):
     modules = {}
 
-class Excluded(object, metaclass=SingletonType):
+
+class Excluded(Singleton):
     excluded = []
 
-class Errors(object, metaclass=SingletonType):
-    errors = []
 
+class Errors(Singleton):
+    errors = []
