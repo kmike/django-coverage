@@ -23,10 +23,9 @@ def html_module_exceptions(filename, exceptions, template, long_desc):
         exception_list.append(template.EXCEPTION_LINE %vars())
     exception_list = os.linesep.join(exception_list)
 
-    fo = file(filename, 'wb+')
-    print(template.TOP, file=fo)
-    print(template.CONTENT_HEADER, file=fo)
-    print(template.CONTENT_BODY %vars(), file=fo)
-    print(template.BOTTOM, file=fo)
+    fo = open(filename, 'w+')
+    fo.write(template.TOP)
+    fo.write(template.CONTENT_HEADER)
+    fo.write(template.CONTENT_BODY %vars())
+    fo.write(template.BOTTOM)
     fo.close()
-

@@ -122,23 +122,23 @@ def html_report(outdir, modules, excludes=None, errors=None):
         html_module_detail(
             os.path.join(m_dir, m_vars.module_name + '.html'), n, nav)
 
-    fo = file(os.path.join(outdir, 'index.html'), 'wb+')
-    print(module_index.TOP, file=fo)
-    print(module_index.CONTENT_HEADER %vars(), file=fo)
-    print(module_index.CONTENT_BODY %vars(), file=fo)
+    fo = open(os.path.join(outdir, 'index.html'), 'w+')
+    fo.write(module_index.TOP)
+    fo.write(module_index.CONTENT_HEADER %vars())
+    fo.write(module_index.CONTENT_BODY %vars())
     if excludes:
         _file = 'excludes.html'
         exceptions_link = _file
         exception_desc = "Excluded packages and modules"
-        print(module_index.EXCEPTIONS_LINK %vars(), file=fo)
+        fo.write(module_index.EXCEPTIONS_LINK %vars())
         html_module_excludes(os.path.join(outdir, _file), excludes)
     if errors:
         _file = 'errors.html'
         exceptions_link = _file
         exception_desc = "Error packages and modules"
-        print(module_index.EXCEPTIONS_LINK %vars(), file=fo)
+        fo.write(module_index.EXCEPTIONS_LINK %vars())
         html_module_errors(os.path.join(outdir, _file), errors)
-    print(module_index.BOTTOM, file=fo)
+    fo.write(module_index.BOTTOM)
     fo.close()
 
     if settings.COVERAGE_BADGE_TYPE:
@@ -147,6 +147,5 @@ def html_report(outdir, modules, excludes=None, errors=None):
             'badges',
             settings.COVERAGE_BADGE_TYPE,
             '%s.png' % int(overall_covered)
-        )).read()
+        ), 'rb').read()
         open(os.path.join(outdir, 'coverage_status.png'), 'wb').write(badge)
-
