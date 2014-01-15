@@ -17,8 +17,8 @@ limitations under the License.
 import os, re, sys
 from glob import glob
 
-from data_storage import *
-from module_loader import find_or_load_module
+from django_coverage.utils.module_tools.data_storage import *
+from django_coverage.utils.module_tools.module_loader import find_or_load_module
 
 try:
     set

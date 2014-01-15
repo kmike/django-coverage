@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from html_module_exceptions import html_module_exceptions
-from templates import default_module_errors as module_errors
+from django_coverage.utils.coverage_report.html_module_exceptions import html_module_exceptions
+from django_coverage.utils.coverage_report.templates import default_module_errors as module_errors
 
 def html_module_errors(filename, errors):
     """

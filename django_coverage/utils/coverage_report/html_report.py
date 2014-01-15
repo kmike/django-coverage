@@ -17,11 +17,11 @@ limitations under the License.
 import os, time
 from urllib import pathname2url as p2url
 
-from data_storage import ModuleVars
-from html_module_detail import html_module_detail
-from html_module_errors import html_module_errors
-from html_module_excludes import html_module_excludes
-from templates import default_module_index as module_index
+from django_coverage.utils.coverage_report.data_storage import ModuleVars
+from django_coverage.utils.coverage_report.html_module_detail import html_module_detail
+from django_coverage.utils.coverage_report.html_module_errors import html_module_errors
+from django_coverage.utils.coverage_report.html_module_excludes import html_module_excludes
+from django_coverage.utils.coverage_report.templates import default_module_index as module_index
 from django_coverage import settings
 
 def html_report(outdir, modules, excludes=None, errors=None):

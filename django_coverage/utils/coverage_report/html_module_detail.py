@@ -16,8 +16,8 @@ limitations under the License.
 
 import cgi, os
 
-from data_storage import ModuleVars
-from templates import default_module_detail as module_detail
+from django_coverage.utils.coverage_report.data_storage import ModuleVars
+from django_coverage.utils.coverage_report.templates import default_module_detail as module_detail
 
 def html_module_detail(filename, module_name, nav=None):
     """
