@@ -16,6 +16,7 @@ limitations under the License.
 
 __all__ = ('Packages', 'Modules', 'Excluded', 'Errors')
 
+
 class SingletonType(type):
     def __call__(cls, *args, **kwargs):
         if getattr(cls, '__instance__', None) is None:
