@@ -15,7 +15,10 @@ limitations under the License.
 """
 
 import os, time
-from urllib.request import pathname2url as p2url
+try:
+    from urllib import pathname2url as p2url
+except ImportError:
+    from urllib.request import pathname2url as p2url
 
 from django_coverage.utils.coverage_report.data_storage import ModuleVars
 from django_coverage.utils.coverage_report.html_module_detail import html_module_detail
