@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 import os, time
-from urllib import pathname2url as p2url
+from urllib.request import pathname2url as p2url
 
 from django_coverage.utils.coverage_report.data_storage import ModuleVars
 from django_coverage.utils.coverage_report.html_module_detail import html_module_detail
@@ -84,7 +84,7 @@ def html_report(outdir, modules, excludes=None, errors=None):
     total_excluded = 0
     total_stmts = 0
     module_stats = list()
-    m_names = modules.keys()
+    m_names = list(modules.keys())
     m_names.sort()
     for n in m_names:
         m_vars = ModuleVars(n, modules[n])
@@ -104,7 +104,7 @@ def html_report(outdir, modules, excludes=None, errors=None):
     else:
         overall_covered = 0.0
 
-    m_names = modules.keys()
+    m_names = list(modules.keys())
     m_names.sort()
     i = 0
     for i, n in enumerate(m_names):
@@ -123,22 +123,22 @@ def html_report(outdir, modules, excludes=None, errors=None):
             os.path.join(m_dir, m_vars.module_name + '.html'), n, nav)
 
     fo = file(os.path.join(outdir, 'index.html'), 'wb+')
-    print >>fo, module_index.TOP
-    print >>fo, module_index.CONTENT_HEADER %vars()
-    print >>fo, module_index.CONTENT_BODY %vars()
+    print(module_index.TOP, file=fo)
+    print(module_index.CONTENT_HEADER %vars(), file=fo)
+    print(module_index.CONTENT_BODY %vars(), file=fo)
     if excludes:
         _file = 'excludes.html'
         exceptions_link = _file
         exception_desc = "Excluded packages and modules"
-        print >>fo, module_index.EXCEPTIONS_LINK %vars()
+        print(module_index.EXCEPTIONS_LINK %vars(), file=fo)
         html_module_excludes(os.path.join(outdir, _file), excludes)
     if errors:
         _file = 'errors.html'
         exceptions_link = _file
         exception_desc = "Error packages and modules"
-        print >>fo, module_index.EXCEPTIONS_LINK %vars()
+        print(module_index.EXCEPTIONS_LINK %vars(), file=fo)
         html_module_errors(os.path.join(outdir, _file), errors)
-    print >>fo, module_index.BOTTOM
+    print(module_index.BOTTOM, file=fo)
     fo.close()
 
     if settings.COVERAGE_BADGE_TYPE:

@@ -24,19 +24,15 @@ class SingletonType(type):
             cls.__instance__ = instance
         return cls.__instance__
 
-class Packages(object):
-    __metaclass__ = SingletonType
+class Packages(object, metaclass=SingletonType):
     packages = {}
 
-class Modules(object):
-    __metaclass__ = SingletonType
+class Modules(object, metaclass=SingletonType):
     modules = {}
 
-class Excluded(object):
-    __metaclass__ = SingletonType
+class Excluded(object, metaclass=SingletonType):
     excluded = []
 
-class Errors(object):
-    __metaclass__ = SingletonType
+class Errors(object, metaclass=SingletonType):
     errors = []
 

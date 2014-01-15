@@ -127,8 +127,8 @@ def get_all_modules(whitelist, blacklist=None, exclude_dirs=None):
 
     whitelist = _prune_whitelist(whitelist, blacklist or [])
     _parse_module_list(whitelist)
-    for pkg_name, pkg in packages.copy().iteritems():
+    for pkg_name, pkg in packages.copy().items():
         _get_all_packages(pkg_name, pkg, blacklist, exclude_dirs)
-    for pkg_name, pkg in packages.copy().iteritems():
+    for pkg_name, pkg in packages.copy().items():
         _get_all_modules(pkg_name, pkg, blacklist)
     return packages, modules, list(set(excluded)), list(set(errors))
