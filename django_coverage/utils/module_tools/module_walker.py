@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import os, re, sys
+import os, re
 from glob import glob
 
-from data_storage import *
-from module_loader import find_or_load_module
+from django_coverage.utils.module_tools.data_storage import *
+from django_coverage.utils.module_tools.module_loader import find_or_load_module
 
 try:
     set
@@ -127,9 +127,8 @@ def get_all_modules(whitelist, blacklist=None, exclude_dirs=None):
 
     whitelist = _prune_whitelist(whitelist, blacklist or [])
     _parse_module_list(whitelist)
-    for pkg_name, pkg in packages.copy().iteritems():
+    for pkg_name, pkg in packages.copy().items():
         _get_all_packages(pkg_name, pkg, blacklist, exclude_dirs)
-    for pkg_name, pkg in packages.copy().iteritems():
+    for pkg_name, pkg in packages.copy().items():
         _get_all_modules(pkg_name, pkg, blacklist)
     return packages, modules, list(set(excluded)), list(set(errors))
-

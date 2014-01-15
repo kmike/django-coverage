@@ -16,8 +16,8 @@ limitations under the License.
 Changed by Mikhail Korobov.
 """
 
-from html_module_exceptions import html_module_exceptions
-from templates import default_module_excludes as module_excludes
+from django_coverage.utils.coverage_report.html_module_exceptions import html_module_exceptions
+from django_coverage.utils.coverage_report.templates import default_module_excludes as module_excludes
 
 def html_module_excludes(filename, excludes):
     """
@@ -54,4 +54,3 @@ def html_module_excludes(filename, excludes):
     not contain any executable statements:
     """
     html_module_exceptions(filename, excludes, module_excludes, long_desc)
-

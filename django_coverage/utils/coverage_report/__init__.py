@@ -14,5 +14,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from html_report import *
-
+from django_coverage.utils.coverage_report.html_report import *

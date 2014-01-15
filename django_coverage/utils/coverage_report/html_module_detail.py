@@ -16,8 +16,8 @@ limitations under the License.
 
 import cgi, os
 
-from data_storage import ModuleVars
-from templates import default_module_detail as module_detail
+from django_coverage.utils.coverage_report.data_storage import ModuleVars
+from django_coverage.utils.coverage_report.templates import default_module_detail as module_detail
 
 def html_module_detail(filename, module_name, nav=None):
     """
@@ -62,7 +62,7 @@ def html_module_detail(filename, module_name, nav=None):
     m_vars.source_lines = source_lines = list()
     i = 0
     for i, source_line in enumerate(
-        [cgi.escape(l.rstrip()) for l in file(m_vars.source_file, 'rb').readlines()]):
+        [cgi.escape(l.rstrip()) for l in open(m_vars.source_file, 'r').readlines()]):
         line_status = 'ignored'
         if i+1 in m_vars.executed: line_status = 'executed'
         if i+1 in m_vars.excluded: line_status = 'excluded'
@@ -79,15 +79,14 @@ def html_module_detail(filename, module_name, nav=None):
         nav_html = module_detail.NAV_NO_PREV %nav
     else:
         nav_html = None
-            
-    fo = file(filename, 'wb+')
-    print >>fo, module_detail.TOP %m_vars.__dict__
-    if nav and nav_html:
-        print >>fo, nav_html
-    print >>fo, module_detail.CONTENT_HEADER %m_vars.__dict__
-    print >>fo, module_detail.CONTENT_BODY %m_vars.__dict__
-    if nav and nav_html:
-        print >>fo, nav_html
-    print >>fo, module_detail.BOTTOM
-    fo.close()
 
+    fo = open(filename, 'w+')
+    fo.write(module_detail.TOP %m_vars.__dict__)
+    if nav and nav_html:
+        fo.write(nav_html)
+    fo.write(module_detail.CONTENT_HEADER %m_vars.__dict__)
+    fo.write(module_detail.CONTENT_BODY %m_vars.__dict__)
+    if nav and nav_html:
+        fo.write(nav_html)
+    fo.write(module_detail.BOTTOM)
+    fo.close()

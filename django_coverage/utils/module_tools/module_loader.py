@@ -19,7 +19,7 @@ import imp, sys, types
 __all__ = ('find_or_load_module',)
 
 def _brute_force_find_module(module_name, module_path, module_type):
-    for m in [m for n, m in sys.modules.iteritems() if type(m) == types.ModuleType]:
+    for m in [m for n, m in sys.modules.items() if type(m) == types.ModuleType]:
         m_path = []
         try:
             if module_type in (imp.PY_COMPILED, imp.PY_SOURCE):

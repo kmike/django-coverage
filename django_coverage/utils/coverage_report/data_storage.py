@@ -52,6 +52,6 @@ class ModuleVars(object):
         if percent_covered < 75: severity = 'warning'
         if percent_covered < 50: severity = 'critical'
 
-        for k, v in locals().iteritems():
+        for k, v in locals().items():
             setattr(self, k, v)
 

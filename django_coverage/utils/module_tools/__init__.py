@@ -14,6 +14,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from module_loader import *
-from module_walker import *
-
+from django_coverage.utils.module_tools.module_loader import *
+from django_coverage.utils.module_tools.module_walker import *
